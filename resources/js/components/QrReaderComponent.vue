@@ -1,14 +1,7 @@
 <template>
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-4" style="margin-top: 70px">
-                <h4 class="text-white" align="center"><i class="fa fa-qrcode"></i> QR Code Scanner</h4>
-                <!--  <p class="error">{{ error }}</p> -->
-                <!--   <p class="decode-result">Last result: <b class="text-warning">{{ result }}</b></p> -->
                 <qrcode-stream :track="paintOutline" @decode="onDecode" @init="onInit" class="qrcodeBox"/>
                 <p align="center" class="text-primary">Powered by <i class="fa fa-code mt-2"></i> <i>Jalol Saidov</i></p>
-            </div>
-        </div>
     </div>
 </template>
 
@@ -39,9 +32,10 @@ export default {
         },
         onDecode (result) {
             this.result = result
-            axios.post('/login',{
+            axios.post('/attendance',{
                 qrcode: this.result
             }).then(response => {
+                window.location.href = '/attendance';
                 // response message
                 if(response.data.message){
                     // <strong>' + response.data.message + '</strong>

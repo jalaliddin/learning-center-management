@@ -34,11 +34,24 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <v-btn
-                                rounded
-                                color="primary"
-                                dark
-                            >
+                            <a class="nav-link" href="{{route('attendance')}}">
+                                    {{_('Davomat')}}
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('attendance')}}">
+                                {{_('Xodimlar')}}
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('attendance')}}">
+                                {{_('Tahlil')}}
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('attendance')}}">
+                                {{_('Sozlamalar')}}
+                            </a>
                         </li>
                     </ul>
 

@@ -21,4 +21,10 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/example', [\App\Http\Controllers\HomeController::class,'example'])->name('example');
+Route::resource('attendance', \App\Http\Controllers\AttendanceController::class);
+Route::resource('student', \App\Http\Controllers\StudentController::class);
+
+Route::get('/attend', [App\Http\Controllers\AttendanceController::class, 'home'])->name('attendance');
+Route::post('/attend', [App\Http\Controllers\AttendanceController::class, 'qrcode'])->name('attendance.post');
+
+//Route::get('/example', [\App\Http\Controllers\HomeController::class,'example'])->name('example');

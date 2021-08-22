@@ -1920,13 +1920,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -1981,10 +1974,11 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       var _this = this;
 
       this.result = result;
-      axios.post('/login', {
+      axios.post('/attendance', {
         qrcode: this.result
       }).then(function (response) {
-        // response message
+        window.location.href = '/attendance'; // response message
+
         if (response.data.message) {
           // <strong>' + response.data.message + '</strong>
           _this.$toast.show("<strong>".concat(response.data.message, "</strong>"), '', {
@@ -39017,37 +39011,22 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
-    _c("div", { staticClass: "row justify-content-center" }, [
-      _c(
-        "div",
-        { staticClass: "col-md-4", staticStyle: { "margin-top": "70px" } },
-        [
-          _vm._m(0),
-          _vm._v(" "),
-          _c("qrcode-stream", {
-            staticClass: "qrcodeBox",
-            attrs: { track: _vm.paintOutline },
-            on: { decode: _vm.onDecode, init: _vm.onInit }
-          }),
-          _vm._v(" "),
-          _vm._m(1)
-        ],
-        1
-      )
-    ])
-  ])
+  return _c(
+    "div",
+    { staticClass: "container" },
+    [
+      _c("qrcode-stream", {
+        staticClass: "qrcodeBox",
+        attrs: { track: _vm.paintOutline },
+        on: { decode: _vm.onDecode, init: _vm.onInit }
+      }),
+      _vm._v(" "),
+      _vm._m(0)
+    ],
+    1
+  )
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("h4", { staticClass: "text-white", attrs: { align: "center" } }, [
-      _c("i", { staticClass: "fa fa-qrcode" }),
-      _vm._v(" QR Code Scanner")
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
