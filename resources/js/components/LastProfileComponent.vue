@@ -5,8 +5,8 @@
                 <img :src="'/uploads/avatars/'+ students.avatar" alt="Admin" class="rounded-circle" width="150">
                 <div class="mt-3">
                     <h4>{{students.name}} {{students.surname}}</h4>
-                    <p class="text-secondary mb-1">Student</p>
                     <p class="text-muted font-size-sm">{{students.phone}}</p>
+                    <p class="text-secondary mb-1">{{students.created_at}}</p>
                 </div>
             </div>
         </div>

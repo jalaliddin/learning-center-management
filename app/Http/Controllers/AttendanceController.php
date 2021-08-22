@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Attendance;
 use App\Models\Student;
 use Illuminate\Http\Request;
 
@@ -39,8 +40,13 @@ class AttendanceController extends Controller
         //wrong
         //error
         $student = Student::where('qr_code', $request->qrcode)->first();
+        $id = $student->id;
+        $attendance = new Attendance();
+        $attendance->status = true;
+        $student = $student->attendance()->save($attendance);
+
         return response()->json([
-            'id' => $student->id,
+            'id' => $id,
             'message'=> 'Qabul qilindi!',
         ], 200);
     }

@@ -31,7 +31,7 @@ class StoreStudentRequest extends FormRequest
             'address' => 'required',
             'sms_phone' => 'required',
             'description' => 'required',
-            'avatar' => 'required|mimes:jpg,bmp,png'
+            'avatar' => 'mimes:jpg,bmp,png'
         ];
     }
 }

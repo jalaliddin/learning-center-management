@@ -3,6 +3,7 @@ import axios from 'axios'
 import Vuex from 'vuex'
 import Vue from 'vue'
 Vue.use(Vuex);
+var date = new Date();
 
 //to handle state
 const state = {
@@ -10,7 +11,8 @@ const state = {
         name: 'Xush',
         surname: 'Kelibsiz',
         avatar: 'avatar.png',
-        phone: ''
+        phone: '',
+        created_at: date.toGMTString()
     }
 }
 
@@ -20,7 +22,7 @@ const getters = {}
 //to handle actions
 const actions = {
     getStudents({ commit }, id) {
-        axios.get('/reader/'+ id +'')
+        axios.get('/reader/'+id)
             .then(response => {
                 commit('SET_STUDENT', response.data)
             })

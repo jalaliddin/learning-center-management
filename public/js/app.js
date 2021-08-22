@@ -2261,14 +2261,16 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_1__.default.use(vuex__WEBPACK_IMPORTED_MODULE_2__.default); //to handle state
+vue__WEBPACK_IMPORTED_MODULE_1__.default.use(vuex__WEBPACK_IMPORTED_MODULE_2__.default);
+var date = new Date(); //to handle state
 
 var state = {
   students: {
     name: 'Xush',
     surname: 'Kelibsiz',
     avatar: 'avatar.png',
-    phone: ''
+    phone: '',
+    created_at: date.toGMTString()
   }
 }; //to handle state
 
@@ -2277,7 +2279,7 @@ var getters = {}; //to handle actions
 var actions = {
   getStudents: function getStudents(_ref, id) {
     var commit = _ref.commit;
-    axios__WEBPACK_IMPORTED_MODULE_0___default().get('/reader/' + id + '').then(function (response) {
+    axios__WEBPACK_IMPORTED_MODULE_0___default().get('/reader/' + id).then(function (response) {
       commit('SET_STUDENT', response.data);
     });
   },
@@ -43570,12 +43572,12 @@ var render = function() {
               )
             ]),
             _vm._v(" "),
-            _c("p", { staticClass: "text-secondary mb-1" }, [
-              _vm._v("Student")
-            ]),
-            _vm._v(" "),
             _c("p", { staticClass: "text-muted font-size-sm" }, [
               _vm._v(_vm._s(_vm.students.phone))
+            ]),
+            _vm._v(" "),
+            _c("p", { staticClass: "text-secondary mb-1" }, [
+              _vm._v(_vm._s(_vm.students.created_at))
             ])
           ])
         ]

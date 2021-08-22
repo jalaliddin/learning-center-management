@@ -11,6 +11,17 @@
                     </div>
 
                     <div class="card-body">
+                        @if(Session::has('message'))
+                            <div class="alert alert-success">{{Session::get('message')}}</div>
+                        @endif
+                        @if(count($errors)>0)
+
+                            <ul>
+                                @foreach($errors->all() as $error)
+                                    <li class="alert alert-danger">{{$error}}</li>
+                                @endforeach
+                            </ul>
+                        @endif
                         <table class="table table-striped">
                             <thead>
                             <tr>
@@ -55,6 +66,7 @@
                             @endforeach
                             </tbody>
                         </table>
+                            {{ $students->links() }}
                     </div>
                 </div>
             </div>
