@@ -22,7 +22,9 @@ import 'izitoast/dist/css/iziToast.min.css';
 import 'es6-promise/auto'
 import Vuetify from 'vuetify';
 import Vuex from 'vuex';
-import store from './store'
+import store from './store';
+import Swal from 'sweetalert2';
+
 Vue.use(Vuex);
 Vue.use(VueQRCodeReader);
 Vue.use(VueIziToast);
@@ -40,6 +42,21 @@ Vue.component('lastprofile-component', require('./components/LastProfileComponen
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+
+window.deleteConfirm = function(formId)
+{
+    Swal.fire({
+        icon: 'warning',
+        text: 'Haqiqatdan ham o\'chirishni xohlaysizmi?',
+        showCancelButton: true,
+        confirmButtonText: 'O\'chirish',
+        confirmButtonColor: '#e3342f',
+    }).then((result) => {
+        if (result.isConfirmed) {
+            document.getElementById(formId).submit();
+        }
+    });
+}
 
 const app = new Vue({
     store,

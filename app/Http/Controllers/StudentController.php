@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreStudentRequest;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Image;
 
 class StudentController extends Controller
 {
@@ -35,13 +37,24 @@ class StudentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreStudentRequest $request)
     {
         $student = new Student;
-        $student->name = $request->name;
+        $student->name = $request->firstname;
         $student->surname = $request->surname;
         $student->phone = $request->phone;
         $student->qr_code = Str::random(60);
+        $student->email = $request->email;
+        $student->address = $request->address;
+        $student->sms_phone = $request->sms_phone;
+        $student->description = $request->description;
+
+        // load avatar
+        $avatar = $request->file('avatar');
+        $filename = time() . '.' . $avatar->getClientOriginalExtension();
+        Image::make($avatar)->resize(300, 300)->save( public_path('/uploads/avatars/' . $filename ) );
+        $student->avatar = $filename;
+
         $student->save();
         return redirect()->route('student.index');
     }
@@ -55,11 +68,7 @@ class StudentController extends Controller
     public function show($id)
     {
         $student = Student::find($id);
-        return response()->json([
-            'name' => $student->name,
-            'surname' => $student->surname,
-            'phone' => $student->phone
-        ],200);
+        return view('student.show', compact('student'));
     }
 
     /**
@@ -91,20 +100,32 @@ class StudentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Student $student)
     {
-        //
+        $student->attendance()->delete();
+        $student->parents()->delete();
+        $student->delete();
+        return redirect()->back();
     }
 
+    public function qrReader($id)
+    {
+        $student = Student::find($id);
+        return response()->json([
+            'name' => $student->name,
+            'surname' => $student->surname,
+            'avatar' => $student->avatar,
+            'phone' => $student->phone
+        ],200);
+    }
     public function qrDownload($id)
     {
         $student = Student::find($id);
         $fileDest = storage_path('qrcode/'.$student->id.'.png');
-//        $url = URL::to('/').'/'.$redirect->uuid;
         \QrCode::size(500)
+            ->margin(1)
             ->format('png')
             ->generate($student->qr_code, $fileDest);
-//        \QrCode::size(500)->generate($student->qr_code, $fileDest);
         return response()->download($fileDest);
     }
 }

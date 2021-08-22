@@ -34,6 +34,11 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
+                            <a class="nav-link" href="/">
+                                {{_('Dashboard')}}
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="{{route('attendance.index')}}">
                                     {{_('Davomat')}}
                             </a>
@@ -44,12 +49,12 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('attendance.index')}}">
+                            <a class="nav-link disabled" href="{{route('attendance.index')}}">
                                 {{_('Tahlil')}}
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('attendance.index')}}">
+                            <a class="nav-link disabled" href="{{route('attendance.index')}}">
                                 {{_('Sozlamalar')}}
                             </a>
                         </li>

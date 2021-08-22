@@ -25,7 +25,10 @@
         "vue-template-compiler": "^2.6.12"
     },
     "dependencies": {
+        "@fortawesome/fontawesome-free": "^5.15.4",
         "es6-promise": "^4.2.8",
+        "font-awesome": "^4.7.0",
+        "sweetalert2": "^11.1.4",
         "vue-izitoast": "^1.2.1",
         "vue-qrcode-reader": "^3.0.3",
         "vuetify": "^2.5.8",
