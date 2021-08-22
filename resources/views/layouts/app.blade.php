@@ -34,22 +34,22 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('attendance')}}">
+                            <a class="nav-link" href="{{route('attendance.index')}}">
                                     {{_('Davomat')}}
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('attendance')}}">
-                                {{_('Xodimlar')}}
+                            <a class="nav-link" href="{{route('student.index')}}">
+                                {{_('Talabalar')}}
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('attendance')}}">
+                            <a class="nav-link" href="{{route('attendance.index')}}">
                                 {{_('Tahlil')}}
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('attendance')}}">
+                            <a class="nav-link" href="{{route('attendance.index')}}">
                                 {{_('Sozlamalar')}}
                             </a>
                         </li>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Student;
 use Illuminate\Http\Request;
 
 class AttendanceController extends Controller
@@ -13,7 +14,7 @@ class AttendanceController extends Controller
      */
     public function index()
     {
-        //
+        return view('attendance.index');
     }
 
     /**
@@ -34,7 +35,14 @@ class AttendanceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //message
+        //wrong
+        //error
+        $student = Student::where('qr_code', $request->qrcode)->first();
+        return response()->json([
+            'id' => $student->id,
+            'message'=> 'Qabul qilindi!',
+        ], 200);
     }
 
     /**

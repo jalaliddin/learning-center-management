@@ -35,9 +35,11 @@ export default {
             axios.post('/attendance',{
                 qrcode: this.result
             }).then(response => {
-                window.location.href = '/attendance';
                 // response message
+                // console.log(response.data.message);
                 if(response.data.message){
+                    this.$store.dispatch("getStudents", response.data.id);
+                    // this.$store.dispatch("getStudent");
                     // <strong>' + response.data.message + '</strong>
                     this.$toast.show(`<strong>${response.data.message}</strong>`, '', {
                         // icon: 'fa fa-user-circle',
@@ -72,7 +74,7 @@ export default {
                 }
             }).catch(error => {
                 // console.log(error)
-                this.$toast.error(`<strong>${'QR Code is not registered'}</strong>`, 'Error', {
+                this.$toast.error(`<strong>${'QR Code ro\'yhatga olinmagan'}</strong>`, 'Error', {
                     position: 'topCenter',
                     progressBarColor: '#333',
                     transitionIn: 'bounceInDown',

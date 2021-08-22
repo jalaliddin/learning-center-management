@@ -18,6 +18,7 @@ class CreateStudentsTable extends Migration
             $table->string('name');
             $table->string('surname');
             $table->string('phone');
+            $table->string('qr_code');
             $table->timestamps();
         });
     }

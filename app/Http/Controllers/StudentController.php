@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class StudentController extends Controller
 {
@@ -13,7 +15,8 @@ class StudentController extends Controller
      */
     public function index()
     {
-        //
+        $students = Student::all();
+        return view('student.index',compact('students'));
     }
 
     /**
@@ -23,7 +26,7 @@ class StudentController extends Controller
      */
     public function create()
     {
-        //
+        return view('student.create');
     }
 
     /**
@@ -34,7 +37,13 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $student = new Student;
+        $student->name = $request->name;
+        $student->surname = $request->surname;
+        $student->phone = $request->phone;
+        $student->qr_code = Str::random(60);
+        $student->save();
+        return redirect()->route('student.index');
     }
 
     /**
@@ -45,7 +54,12 @@ class StudentController extends Controller
      */
     public function show($id)
     {
-        //
+        $student = Student::find($id);
+        return response()->json([
+            'name' => $student->name,
+            'surname' => $student->surname,
+            'phone' => $student->phone
+        ],200);
     }
 
     /**
@@ -80,5 +94,17 @@ class StudentController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function qrDownload($id)
+    {
+        $student = Student::find($id);
+        $fileDest = storage_path('qrcode/'.$student->id.'.png');
+//        $url = URL::to('/').'/'.$redirect->uuid;
+        \QrCode::size(500)
+            ->format('png')
+            ->generate($student->qr_code, $fileDest);
+//        \QrCode::size(500)->generate($student->qr_code, $fileDest);
+        return response()->download($fileDest);
     }
 }

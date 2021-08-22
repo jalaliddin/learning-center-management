@@ -17,9 +17,13 @@ window.Vue = require('vue').default;
  */
 
 import VueQRCodeReader from 'vue-qrcode-reader';
-import VueIziToast from "vue-izitoast";
+import VueIziToast from 'vue-izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
-import Vuetify from "vuetify";
+import 'es6-promise/auto'
+import Vuetify from 'vuetify';
+import Vuex from 'vuex';
+import store from './store'
+Vue.use(Vuex);
 Vue.use(VueQRCodeReader);
 Vue.use(VueIziToast);
 Vue.use(Vuetify);
@@ -29,7 +33,7 @@ Vue.use(Vuetify);
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('qrreader-component', require('./components/QrReaderComponent.vue').default);
-
+Vue.component('lastprofile-component', require('./components/LastProfileComponent').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -38,5 +42,6 @@ Vue.component('qrreader-component', require('./components/QrReaderComponent.vue'
  */
 
 const app = new Vue({
-    el: '#app',
+    store,
+    el: '#app'
 });
