@@ -1974,6 +1974,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -43666,6 +43669,12 @@ var render = function() {
             )
           ])
         : _vm._e(),
+      _vm._v(" "),
+      _c("button", { on: { click: _vm.switchCamera } }, [
+        _c("img", {
+          attrs: { src: "/uploads/img/camera-switch.svg", alt: "switch camera" }
+        })
+      ]),
       _vm._v(" "),
       _c(
         "qrcode-stream",

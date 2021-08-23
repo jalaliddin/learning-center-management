@@ -7,6 +7,9 @@
         <p class="error" v-if="noRearCamera">
             You don't seem to have a rear camera on your device
         </p>
+        <button @click="switchCamera">
+            <img :src="'/uploads/img/camera-switch.svg'" alt="switch camera">
+        </button>
         <qrcode-stream :track="paintOutline" @decode="onDecode" :camera="camera" @init="onInit" class="qrcodeBox">
             <button @click="switchCamera">
                 <img :src="'/uploads/img/camera-switch.svg'" alt="switch camera">
