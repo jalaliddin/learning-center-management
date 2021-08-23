@@ -49,7 +49,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link disabled" href="{{route('attendance.index')}}">
+                            <a class="nav-link" href="{{route('monitoring')}}">
                                 {{_('Tahlil')}}
                             </a>
                         </li>

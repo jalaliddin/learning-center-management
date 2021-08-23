@@ -17,12 +17,11 @@ use Illuminate\Support\Facades\Route;
 Auth::routes(['register' => true]);
 
 Route::group(['middleware' => ['auth']], function () {
-    Route::get('/', function () {
-        return view('welcome');
-    });
+    Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
 //    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::resource('attendance', \App\Http\Controllers\AttendanceController::class);
     Route::resource('student', \App\Http\Controllers\StudentController::class);
+    Route::get('/monitoring', [\App\Http\Controllers\AttendanceController::class, 'monitoring'])->name('monitoring');
     Route::get('/qrcode/{id}', [\App\Http\Controllers\StudentController::class, 'qrDownload'])->name('qrcode');
     Route::get('/reader/{id}', [\App\Http\Controllers\StudentController::class, 'qrReader'])->name('qrcode.reader');
 });

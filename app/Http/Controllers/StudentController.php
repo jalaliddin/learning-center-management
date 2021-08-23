@@ -6,6 +6,7 @@ use App\Http\Requests\StoreStudentRequest;
 use App\Models\Attendance;
 use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use Image;
 
@@ -135,6 +136,12 @@ class StudentController extends Controller
         $student->attendance()->delete();
         $student->parents()->delete();
         $student->delete();
+        if(File::exists(public_path('uploads/avatars/'.$student->avatar.''))) {
+            File::delete(public_path('uploads/avatars/'.$student->avatar.''));
+        }
+        if(File::exists(public_path('uploads/qrcode/'.$student->id.'.png'))) {
+            File::delete(public_path('uploads/qrcode/'.$student->id.'.png'));
+        }
         return redirect()->back()->with('message', 'Ma\'lumot o\'chirildi!');
     }
 
