@@ -1,7 +1,18 @@
 <template>
     <div class="container">
-                <qrcode-stream :track="paintOutline" @decode="onDecode" @init="onInit" class="qrcodeBox"/>
-                <p align="center" class="text-primary">Powered by <i class="fa fa-code mt-2"></i> <i>Jalol Saidov</i></p>
+        <p class="error" v-if="noFrontCamera">
+            You don't seem to have a front camera on your device
+        </p>
+
+        <p class="error" v-if="noRearCamera">
+            You don't seem to have a rear camera on your device
+        </p>
+        <qrcode-stream :track="paintOutline" @decode="onDecode" :camera="camera" @init="onInit" class="qrcodeBox">
+            <button @click="switchCamera">
+                <img :src="'/uploads/img/camera-switch.svg'" alt="switch camera">
+            </button>
+        </qrcode-stream>
+        <p align="center" class="text-primary"><a href="https://medialife.uz">Powered by <i class="fa fa-code mt-2"></i> <i>Jalol Saidov</i></a></p>
     </div>
 </template>
 
@@ -11,6 +22,9 @@ export default {
         return {
             result: '',
             error: '',
+            camera: 'auto',
+            noRearCamera: false,
+            noFrontCamera: false
         }
     },
     methods: {
@@ -82,6 +96,16 @@ export default {
                 });
             })
         },
+        switchCamera () {
+            switch (this.camera) {
+                case 'front':
+                    this.camera = 'rear'
+                    break
+                case 'rear':
+                    this.camera = 'front'
+                    break
+            }
+        },
         async onInit (promise) {
             try {
                 await promise
@@ -99,6 +123,21 @@ export default {
                 } else if (error.name === 'StreamApiNotSupportedError') {
                     this.error = "ERROR: Stream API is not supported in this browser"
                 }
+
+                const triedFrontCamera = this.camera === 'front'
+                const triedRearCamera = this.camera === 'rear'
+
+                const cameraMissingError = error.name === 'OverconstrainedError'
+
+                if (triedRearCamera && cameraMissingError) {
+                    this.noRearCamera = true
+                }
+
+                if (triedFrontCamera && cameraMissingError) {
+                    this.noFrontCamera = true
+                }
+
+                console.error(error)
             }
         }
     }
@@ -112,5 +151,11 @@ export default {
 }
 .qrcodeBox{
     border: 2px #fff solid;
+}
+
+button {
+    position: absolute;
+    left: 10px;
+    top: 10px;
 }
 </style>

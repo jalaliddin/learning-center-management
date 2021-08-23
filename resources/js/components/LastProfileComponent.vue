@@ -26,7 +26,7 @@ export default {
       }
     },
     mounted() {
-        this.$store.dispatch("getStaticStudents");
+        // this.$store.dispatch("getStudent");
     },
     methods: {
     }

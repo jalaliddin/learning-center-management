@@ -1916,8 +1916,7 @@ __webpack_require__.r(__webpack_exports__);
       return this.$store.state.students;
     }
   },
-  mounted: function mounted() {
-    this.$store.dispatch("getStaticStudents");
+  mounted: function mounted() {// this.$store.dispatch("getStudent");
   },
   methods: {}
 });
@@ -1964,11 +1963,25 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       result: '',
-      error: ''
+      error: '',
+      camera: 'auto',
+      noRearCamera: false,
+      noFrontCamera: false
     };
   },
   methods: {
@@ -2069,10 +2082,22 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         });
       });
     },
+    switchCamera: function switchCamera() {
+      switch (this.camera) {
+        case 'front':
+          this.camera = 'rear';
+          break;
+
+        case 'rear':
+          this.camera = 'front';
+          break;
+      }
+    },
     onInit: function onInit(promise) {
       var _this2 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        var triedFrontCamera, triedRearCamera, cameraMissingError;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -2082,7 +2107,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
                 return promise;
 
               case 3:
-                _context.next = 8;
+                _context.next = 14;
                 break;
 
               case 5:
@@ -2103,7 +2128,21 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
                   _this2.error = "ERROR: Stream API is not supported in this browser";
                 }
 
-              case 8:
+                triedFrontCamera = _this2.camera === 'front';
+                triedRearCamera = _this2.camera === 'rear';
+                cameraMissingError = _context.t0.name === 'OverconstrainedError';
+
+                if (triedRearCamera && cameraMissingError) {
+                  _this2.noRearCamera = true;
+                }
+
+                if (triedFrontCamera && cameraMissingError) {
+                  _this2.noFrontCamera = true;
+                }
+
+                console.error(_context.t0);
+
+              case 14:
               case "end":
                 return _context.stop();
             }
@@ -6787,7 +6826,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.error[data-v-523e2bbe] {\n    font-weight: bold;\n    color: red;\n}\n.qrcodeBox[data-v-523e2bbe]{\n    border: 2px #fff solid;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.error[data-v-523e2bbe] {\n    font-weight: bold;\n    color: red;\n}\n.qrcodeBox[data-v-523e2bbe]{\n    border: 2px #fff solid;\n}\nbutton[data-v-523e2bbe] {\n    position: absolute;\n    left: 10px;\n    top: 10px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -43612,11 +43651,40 @@ var render = function() {
     "div",
     { staticClass: "container" },
     [
-      _c("qrcode-stream", {
-        staticClass: "qrcodeBox",
-        attrs: { track: _vm.paintOutline },
-        on: { decode: _vm.onDecode, init: _vm.onInit }
-      }),
+      _vm.noFrontCamera
+        ? _c("p", { staticClass: "error" }, [
+            _vm._v(
+              "\n        You don't seem to have a front camera on your device\n    "
+            )
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.noRearCamera
+        ? _c("p", { staticClass: "error" }, [
+            _vm._v(
+              "\n        You don't seem to have a rear camera on your device\n    "
+            )
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _c(
+        "qrcode-stream",
+        {
+          staticClass: "qrcodeBox",
+          attrs: { track: _vm.paintOutline, camera: _vm.camera },
+          on: { decode: _vm.onDecode, init: _vm.onInit }
+        },
+        [
+          _c("button", { on: { click: _vm.switchCamera } }, [
+            _c("img", {
+              attrs: {
+                src: "/uploads/img/camera-switch.svg",
+                alt: "switch camera"
+              }
+            })
+          ])
+        ]
+      ),
       _vm._v(" "),
       _vm._m(0)
     ],
@@ -43632,10 +43700,12 @@ var staticRenderFns = [
       "p",
       { staticClass: "text-primary", attrs: { align: "center" } },
       [
-        _vm._v("Powered by "),
-        _c("i", { staticClass: "fa fa-code mt-2" }),
-        _vm._v(" "),
-        _c("i", [_vm._v("Jalol Saidov")])
+        _c("a", { attrs: { href: "https://medialife.uz" } }, [
+          _vm._v("Powered by "),
+          _c("i", { staticClass: "fa fa-code mt-2" }),
+          _vm._v(" "),
+          _c("i", [_vm._v("Jalol Saidov")])
+        ])
       ]
     )
   }

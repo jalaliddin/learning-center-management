@@ -15,7 +15,7 @@
             </div>
             <div class="col">
                 <div class="card">
-                    <div class="card-header text-center">{{ __('Talaba') }}</div>
+                    <div class="card-header text-center">{{ __('Ma\'lumotlar') }}</div>
                     <div class="card-body">
                         <lastprofile-component></lastprofile-component>
                     </div>

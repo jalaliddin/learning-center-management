@@ -45,12 +45,12 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('student.index')}}">
-                                {{_('Talabalar')}}
+                                {{_('O\'quvchilar')}}
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('monitoring')}}">
-                                {{_('Tahlil')}}
+                                {{_('Monitoring')}}
                             </a>
                         </li>
                         <li class="nav-item">

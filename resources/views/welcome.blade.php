@@ -11,10 +11,10 @@
                         <div class="card-deck">
                             <div class="card-group">
                                 <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
-                                    <div class="card-header text-center">Umumiy shaxslar soni</div>
+                                    <div class="card-header text-center">Umumiy o'quvchilar soni</div>
                                     <div class="card-body">
                                         <h3 class="card-title">{{ $studentCount }}</h3>
-                                        <p class="card-text">Tizimdan ro'yhatdan o'tgan ayni paytda holati faol shaxslar.</p>
+                                        <p class="card-text">Tizimdan ro'yhatdan o'tgan ayni paytda holati faol o'quvchilar.</p>
                                     </div>
                                 </div>
                                 <div class="card text-white bg-success mb-3" style="max-width: 18rem;">

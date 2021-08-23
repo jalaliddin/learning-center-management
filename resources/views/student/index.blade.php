@@ -6,8 +6,8 @@
             <div class="col">
                 <div class="card">
                     <div class="card-header">
-                        {{ __('Talabalar') }}
-                        <a href="{{route('student.create')}}" class="btn btn-success float-right active" role="button" aria-pressed="true">Yangi talaba</a>
+                        {{ __('O\'quvchilar') }}
+                        <a href="{{route('student.create')}}" class="btn btn-success float-right active" role="button" aria-pressed="true">Yangi o'quvchi</a>
                     </div>
 
                     <div class="card-body">
