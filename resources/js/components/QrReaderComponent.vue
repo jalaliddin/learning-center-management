@@ -1,16 +1,13 @@
 <template>
     <div class="container">
         <p class="error" v-if="noFrontCamera">
-            You don't seem to have a front camera on your device
+            Front kamera topilmadi
         </p>
 
         <p class="error" v-if="noRearCamera">
-            You don't seem to have a rear camera on your device
+            Orqa kamera topilmadi
         </p>
-        <button @click="switchCamera">
-            <img :src="'/uploads/img/camera-switch.svg'" alt="switch camera">
-        </button>
-        <qrcode-stream :track="paintOutline" @decode="onDecode" :camera="camera" @init="onInit" class="qrcodeBox">
+        <qrcode-stream :camera="camera" :track="paintOutline" @decode="onDecode" @init="onInit" class="qrcodeBox">
             <button @click="switchCamera">
                 <img :src="'/uploads/img/camera-switch.svg'" alt="switch camera">
             </button>
@@ -25,7 +22,7 @@ export default {
         return {
             result: '',
             error: '',
-            camera: 'auto',
+            camera: '',
             noRearCamera: false,
             noFrontCamera: false
         }
@@ -102,7 +99,7 @@ export default {
         switchCamera () {
             switch (this.camera) {
                 case 'front':
-                    this.camera = 'rear'
+                    this.camera = 'auto'
                     break
                 case 'rear':
                     this.camera = 'front'

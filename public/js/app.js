@@ -1974,15 +1974,12 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       result: '',
       error: '',
-      camera: 'auto',
+      camera: '',
       noRearCamera: false,
       noFrontCamera: false
     };
@@ -2088,7 +2085,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     switchCamera: function switchCamera() {
       switch (this.camera) {
         case 'front':
-          this.camera = 'rear';
+          this.camera = 'auto';
           break;
 
         case 'rear':
@@ -2203,10 +2200,12 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js"
 
 
 
+
 Vue.use(vuex__WEBPACK_IMPORTED_MODULE_6__.default);
 Vue.use((vue_qrcode_reader__WEBPACK_IMPORTED_MODULE_0___default()));
 Vue.use((vue_izitoast__WEBPACK_IMPORTED_MODULE_1___default()));
-Vue.use((vuetify__WEBPACK_IMPORTED_MODULE_7___default())); // const files = require.context('./', true, /\.vue$/i)
+Vue.use((vuetify__WEBPACK_IMPORTED_MODULE_7___default()));
+Vue.use(vue_qrcode_reader__WEBPACK_IMPORTED_MODULE_0__.QrcodeStream); // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 // import QrReader from './components/QrReaderComponent';
 
@@ -43656,31 +43655,21 @@ var render = function() {
     [
       _vm.noFrontCamera
         ? _c("p", { staticClass: "error" }, [
-            _vm._v(
-              "\n        You don't seem to have a front camera on your device\n    "
-            )
+            _vm._v("\n        Front kamera topilmadi\n    ")
           ])
         : _vm._e(),
       _vm._v(" "),
       _vm.noRearCamera
         ? _c("p", { staticClass: "error" }, [
-            _vm._v(
-              "\n        You don't seem to have a rear camera on your device\n    "
-            )
+            _vm._v("\n        Orqa kamera topilmadi\n    ")
           ])
         : _vm._e(),
-      _vm._v(" "),
-      _c("button", { on: { click: _vm.switchCamera } }, [
-        _c("img", {
-          attrs: { src: "/uploads/img/camera-switch.svg", alt: "switch camera" }
-        })
-      ]),
       _vm._v(" "),
       _c(
         "qrcode-stream",
         {
           staticClass: "qrcodeBox",
-          attrs: { track: _vm.paintOutline, camera: _vm.camera },
+          attrs: { camera: _vm.camera, track: _vm.paintOutline },
           on: { decode: _vm.onDecode, init: _vm.onInit }
         },
         [

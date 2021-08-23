@@ -24,11 +24,13 @@ import Vuetify from 'vuetify';
 import Vuex from 'vuex';
 import store from './store';
 import Swal from 'sweetalert2';
+import { QrcodeStream } from "vue-qrcode-reader";
 
 Vue.use(Vuex);
 Vue.use(VueQRCodeReader);
 Vue.use(VueIziToast);
 Vue.use(Vuetify);
+Vue.use(QrcodeStream);
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 // import QrReader from './components/QrReaderComponent';
